@@ -5,9 +5,18 @@
 # arguments are passed to download.file()
 chain_download <- function(url, destfile, ...) {
   if (missing(destfile)) destfile <- file.path(tempdir(), basename(url))
-  if (file.exists(destfile)) return(destfile)
+  
+  file <- sub(".gz", "", destfile)
+  if (file.exists(file)) return(file)
+  
   download.file(url, destfile, ...)
-  return(destfile)
+  
+  # TODO: Need a more efficient way to decompress
+  file.con <- gzfile(destfile)
+  writeLines(readLines(file.con), file)
+  close.connection(file.con)
+  
+  return(file)
 }
 
 # Construct valid chain file URL

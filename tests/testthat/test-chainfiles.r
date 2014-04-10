@@ -13,7 +13,8 @@ test_that("chain file URLs are valid", {
 
 test_that("chain files downloaded successfully", {
   chain.url <- chain_url(from = "hg18", to = "hg19")
-  chain.file <- tempfile(fileext = ".chain.gz")
+  chain.gz <- tempfile(fileext = ".chain.gz")
+  chain.file <- sub(".gz", "", chain.gz)
   
   expect_false(file.exists(chain.file))
   expect_output(chain_download(chain.url, chain.file, quiet = TRUE), chain.file)
