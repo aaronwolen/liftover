@@ -1,0 +1,6 @@
+export(liftover)
+importFrom(GenomicRanges,genome)
+importFrom(GenomicRanges,unlist)
+importFrom(rtracklayer,import.chain)
+importFrom(rtracklayer,liftOver)
+importFrom(rtracklayer,ucscGenomes)
