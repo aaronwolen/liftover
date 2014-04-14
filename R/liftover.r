@@ -8,7 +8,7 @@
 #' 
 #' @export
 
-liftover <- function(x, from = genome(x), to) {
+liftover <- function(x, from = genome(x), to, chain.dir = getOption("chain.dir")) {
   
   genomes <- ucscGenomes()
   from <- match.arg(from[1], genomes$db)

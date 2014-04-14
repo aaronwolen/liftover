@@ -3,11 +3,16 @@
 # Download chain file to a temporary directory if it doesn't exist already.
 # Returns a character vector giving the name of the downloaded file. Additional
 # arguments are passed to download.file()
-chain_download <- function(url, destfile, ...) {
-  if (missing(destfile)) destfile <- file.path(tempdir(), basename(url))
+chain_download <- function(url, chain.path = getOption("chain.path"), ...) {
+  
+  destfile <- file.path(chain.path, basename(url))
   
   file <- sub(".gz", "", destfile)
   if (file.exists(file)) return(file)
+  
+  if (!file.exists(chain.path)) {
+    dir.create(chain.path, showWarnings = FALSE, recursive = TRUE)
+  } 
   
   download.file(url, destfile, ...)
   
