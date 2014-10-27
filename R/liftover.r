@@ -43,8 +43,12 @@ liftover <- function(x, from = genome(x), to, chain.path = getOption("chain.path
   }
     
   lifted <- lifted[nchained > 0]
-  lifted <-GenomicRanges::unlist(lifted)
+  lifted <- GenomicRanges::unlist(lifted)
   genome(lifted) <- to
+  
+  # Store original coordinates as a metadata variable
+  lifted$linked <- x[seq_along(x)[nchained > 0]]
+  mcols(lifted$linked) <- new("DataFrame", nrows = length(lifted))
   
   return(lifted)
 }
