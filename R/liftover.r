@@ -4,7 +4,8 @@
 #' @param from genome assembly to which x is currently mapped
 #' @param to genome assembly to which x should be mapped
 #' @importFrom rtracklayer ucscGenomes import.chain liftOver
-#' @importFrom GenomicRanges unlist genome
+#' @importFrom GenomicRanges unlist
+#' @importFrom GenomeInfoDb genome
 #' 
 #' @export
 
